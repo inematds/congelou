@@ -12,7 +12,7 @@ Quando o tempo volta, vem o estrago.
 
 Guia completo (landing + passo a passo + como repetir com outro assunto): **https://inematds.github.io/congelou/guia/**
 
-🎬 Vídeos: [v1 original](guia/assets/congelou.mp4) · [v2 freeze total + paradas](guia/assets/congelou_v2.mp4) · [v3 gato no microondas](guia/assets/microondas.mp4)
+🎬 Vídeos: [v1 original](guia/assets/congelou.mp4) · [v2 freeze total + paradas](guia/assets/congelou_v2.mp4) · [v3 gato no microondas (4K, 2 congelamentos)](guia/assets/microondas.mp4)
 
 ## Como funciona
 

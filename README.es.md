@@ -12,7 +12,7 @@ Cuando el tiempo vuelve, llega el desastre.
 
 Guía completa (landing + paso a paso + cómo repetir con otra historia): **https://inematds.github.io/congelou/guia/es/**
 
-🎬 Videos: [v1 original](guia/assets/congelou.mp4) · [v2 congelamiento total + paradas](guia/assets/congelou_v2.mp4) · [v3 gato en el microondas](guia/assets/microondas.mp4)
+🎬 Videos: [v1 original](guia/assets/congelou.mp4) · [v2 congelamiento total + paradas](guia/assets/congelou_v2.mp4) · [v3 gato en el microondas (4K, 2 congelamientos)](guia/assets/microondas.mp4)
 
 ## Cómo funciona
 

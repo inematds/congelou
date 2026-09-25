@@ -21,3 +21,12 @@ Ref de rosto: `ref/nei.jpg` (cópia de ~/projetos/explicavideos/guia/assets/nei.
 - 16:22 M3 OK (120 créd, 10s) → montagem v3
 - 16:24 v3 microondas.mp4 32.2s -14.5 LUFS publicada no guia. Créditos restantes 6853.8
 - 16:28 v2 ATUALIZADA a pedido: câmera lenta interpolada → 4 paradas (anda 0.3s / trava 0.8→0.4s, som some na trava). 37.6s. Sem custo Kling. Backup slow-mo em build/.
+- 17:02 V3 REFEITA (usuário não gostou): gato sai ANTES de pôr o prato, derruba o prato; congelamentos em 4K nítidos, vários momentos; sem interpolação
+- 17:04 k4 OK (20 créd). N1 submetido 4K 4s (medir custo 4K)
+- 17:08 N1 OK 4K (3856x2148) 4s = 140 créd → 4K custa 35 créd/s (~3x 1080p)
+- 17:10 N1_nitido OK (20 créd) → N2 freeze 1 submetido 4K 8s
+- 17:15 N2 (260 créd) FALHOU: prato continua caindo no freeze e câmera quase parada. Troca: freeze = still 4K nítido + movimento de câmera no ffmpeg; áudio do N2 reaproveitado
+- 17:18 F1 (freeze 1) OK: still 4K 5504px nítido + push-in ffmpeg 8s, som do N2 (custo 20). N3 submetido 4K 4s a partir de F1
+- 17:24 N3 OK 4K (140 créd) mas giro borrado ~2.5s → usar só N3[0:2.2]. F2 (impacto do prato, still 4K gerado) OK 20 créd. N5 submetido 4K 8s a partir de F2
+- 20:04 N5 OK 4K 8s (280 créd). Montagem v3 nova 4K: N1 F1 N3c F2 N5
+- 20:05 v3 NOVA publicada: microondas.mp4 4K 29s -14.7 LUFS (N1 F1 N3c F2 N5). Custo v3 refeita ≈ 880 créd (N2 260 perdido). Saldo 6023.8

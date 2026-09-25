@@ -12,7 +12,7 @@ When time resumes, chaos follows.
 
 Full guide (landing + step by step + how to repeat with another story): **https://inematds.github.io/congelou/guia/en/**
 
-🎬 Videos: [v1 original](guia/assets/congelou.mp4) · [v2 total freeze + stops](guia/assets/congelou_v2.mp4) · [v3 cat in the microwave](guia/assets/microondas.mp4)
+🎬 Videos: [v1 original](guia/assets/congelou.mp4) · [v2 total freeze + stops](guia/assets/congelou_v2.mp4) · [v3 cat in the microwave (4K, 2 freezes)](guia/assets/microondas.mp4)
 
 ## How it works
 
