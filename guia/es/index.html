@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Congelou — efecto time freeze con tu suscripción Kling AI</title>
+<meta name="description" content="Corto de ~38s con efecto time freeze hecho 100% con la suscripción Kling AI vía CLI oficial: keyframe con rostro real, 4 clips Kling 3.0 con audio nativo encadenados por el último cuadro y montaje con ffmpeg. Prompts, scripts y cómo repetirlo con otro tema.">
+<link rel="alternate" hreflang="pt-BR" href="https://inematds.github.io/congelou/guia/">
+<link rel="alternate" hreflang="en" href="https://inematds.github.io/congelou/guia/en/">
+<link rel="alternate" hreflang="es" href="https://inematds.github.io/congelou/guia/es/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0c0c10; --bg2:#14141b; --card:#16161e; --line:#272730;
+    --txt:#e9e9ee; --mut:#9a9aa6; --amb:#E2A23B; --amb2:#f0c070; --sky:#38bdf8; --pro:#cbd5e1;
+    color-scheme:dark;
+  }
+  body.light{
+    --bg:#f6f7f9; --bg2:#eceef2; --card:#ffffff; --line:#e1e3ea;
+    --txt:#1a1a22; --mut:#5b5b68; --amb:#b9791d; --amb2:#a16207; --sky:#0369a1; --pro:#b45309;
+    color-scheme:light;
+  }
+  body.light .hero .glow{opacity:.5}
+  body.light pre{background:#0e0e14;color:#d6d6e0}
+  body.light pre .c{color:#8a8a98}
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--txt);font:16px/1.65 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  h1,h2,h3{font-family:Sora,sans-serif;line-height:1.15;margin:0}
+  a{color:var(--amb);text-decoration:none}
+  code,pre{font-family:"JetBrains Mono",monospace}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 22px}
+  .mut{color:var(--mut)} .amb{color:var(--amb)}
+  .chip{display:inline-block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amb);font-weight:600;font-family:Sora}
+  nav{position:sticky;top:0;z-index:30;backdrop-filter:blur(12px);background:rgba(12,12,16,.78);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;gap:22px;height:60px}
+  nav .brand{display:flex;align-items:center;gap:8px;font-family:Sora;font-weight:800;letter-spacing:-.02em;color:var(--amb)}
+  nav .brand .emoji{font-size:1.25rem}
+  nav .sep{color:var(--mut);opacity:.45}
+  nav .inema{color:var(--sky);font-weight:600;font-size:.88rem;font-family:Sora}
+  nav .inema:hover{filter:brightness(1.15)}
+  nav .pro{color:var(--pro);font-weight:600;font-size:.88rem;font-family:Sora}
+  nav .pro:hover{filter:brightness(1.15)}
+  nav .clubpro{display:inline-flex;align-items:center;gap:6px}
+  nav .links{margin-left:auto;display:flex;align-items:center;gap:20px;font-size:.92rem}
+  nav .links a.sec{color:var(--mut)} nav .links a.sec:hover{color:var(--txt)}
+  .lang{display:inline-flex;gap:2px;font-family:Sora;font-size:.78rem}
+  .lang a{color:var(--mut);padding:.2em .45em;border-radius:6px} .lang a.on{color:var(--amb);background:rgba(226,162,59,.12)}
+  .tgl{background:var(--bg2);border:1px solid var(--line);color:var(--txt);width:38px;height:38px;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;font-size:1.05rem}
+  .tgl:hover{border-color:var(--amb)}
+  .btn{display:inline-block;background:var(--amb);color:#1a1206;font-weight:600;padding:.6em 1.05em;border-radius:10px;font-family:Sora}
+  .btn.ghost{background:transparent;color:var(--txt);border:1px solid var(--line)}
+  @media(max-width:760px){nav .links a.sec{display:none}}
+  @media(max-width:520px){nav .wrap{gap:8px;padding:8px 14px;height:auto;flex-wrap:wrap} nav .links{gap:8px;margin-left:0;width:100%;justify-content:space-between} nav .btn{padding:.45em .7em;font-size:.82rem} .tgl{width:34px;height:34px}}
+  .hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+  .hero .glow{position:absolute;inset:-40% -20% auto auto;width:70%;height:600px;background:radial-gradient(closest-side,rgba(226,162,59,.22),transparent 70%);pointer-events:none}
+  .hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;padding:74px 22px}
+  .hero h1{font-size:clamp(2.2rem,5vw,3.5rem);font-weight:800;letter-spacing:-.025em}
+  .hero p.lead{font-size:1.18rem;color:var(--mut);margin:1.1em 0 1.6em;max-width:34ch}
+  .hero .cta{display:flex;gap:12px;flex-wrap:wrap}
+  .hero figure{margin:0;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px -30px #000}
+  .hero figure img{width:100%;display:block}
+  @media(max-width:780px){.hero .wrap{grid-template-columns:1fr;padding:48px 22px}}
+  section{padding:62px 0;border-bottom:1px solid var(--line)}
+  section h2{font-size:clamp(1.5rem,3.4vw,2.1rem);font-weight:800;letter-spacing:-.02em}
+  section .sub{color:var(--mut);margin:.6em 0 2em;max-width:62ch}
+  .grid{display:grid;gap:16px}
+  .g3{grid-template-columns:repeat(3,1fr)} .g4{grid-template-columns:repeat(4,1fr)} .g2{grid-template-columns:repeat(2,1fr)}
+  @media(max-width:820px){.g3,.g4{grid-template-columns:1fr 1fr}}
+  @media(max-width:540px){.g2,.g3,.g4{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+  .card h3{font-size:1.05rem;margin-bottom:.4em}
+  .card p{color:var(--mut);font-size:.92rem;margin:0}
+  .num{display:inline-flex;width:30px;height:30px;align-items:center;justify-content:center;border-radius:8px;background:rgba(226,162,59,.14);color:var(--amb);font-family:Sora;font-weight:800;font-size:.9rem;margin-bottom:.7em}
+  .flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}
+  .flow span{background:var(--bg2);border:1px solid var(--line);border-radius:999px;padding:.45em .9em;font-size:.85rem;font-family:Sora;font-weight:600}
+  .flow .arr{color:var(--amb);border:none;background:none;padding:0 .1em}
+  pre{background:#0a0a0e;border:1px solid var(--line);border-radius:12px;padding:16px 18px;overflow:auto;font-size:.86rem;line-height:1.6;color:#d6d6e0}
+  pre .c{color:#6f6f7c} pre .k{color:var(--amb2)} pre .s{color:#9ece6a}
+  .step{display:grid;grid-template-columns:46px 1fr;gap:16px;margin-bottom:26px}
+  .step .b{width:46px;height:46px;border-radius:12px;background:var(--amb);color:#1a1206;font-family:Sora;font-weight:800;font-size:1.25rem;display:flex;align-items:center;justify-content:center}
+  .step h3{font-size:1.12rem;margin-bottom:.3em}
+  .step p{color:var(--mut);margin:.2em 0 .7em}
+  .ex{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:680px){.ex{grid-template-columns:1fr}}
+  .ex figure{margin:0;border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+  .ex figure img{width:100%;display:block}
+  .ex figcaption{padding:12px 14px;font-size:.88rem;color:var(--mut);background:var(--card)}
+  .phase{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid var(--line)}
+  .phase:last-child{border:none}
+  .phase .tag{flex:0 0 92px;font-family:Sora;font-weight:800;color:var(--amb)}
+  .phase .d strong{display:block;margin-bottom:.2em}
+  .phase .d span{color:var(--mut);font-size:.92rem}
+  footer{padding:46px 0;text-align:center;color:var(--mut);font-size:.9rem}
+  .pill{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:.3em .8em;font-size:.78rem;color:var(--mut);margin:0 4px}
+  /* congelou: reproductor de video + detalles de los prompts */
+  .player{border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px -30px #000;background:#000}
+  .player video{width:100%;display:block}
+  details{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin-bottom:12px}
+  details summary{cursor:pointer;font-family:Sora;font-weight:600}
+  details pre{white-space:pre-wrap;margin:12px 0 4px}
+  table{width:100%;border-collapse:collapse;font-size:.92rem}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{font-family:Sora;color:var(--amb);font-weight:600}
+  .tbl{overflow-x:auto}
+</style>
+</head>
+<body>
+
+<nav><div class="wrap">
+  <a class="brand" href="#top"><span class="emoji">🥶</span> Congelou</a>
+  <span class="sep">|</span>
+  <span class="clubpro">
+    <a class="inema" href="https://inema.club" target="_blank" rel="noopener">INEMA.CLUB</a>
+    <span class="sep">-</span>
+    <a class="pro" href="https://inema.pro" target="_blank" rel="noopener">PRO</a>
+  </span>
+  <div class="links">
+    <a class="sec" href="#video">Video</a>
+    <a class="sec" href="#fluxo">Cómo funciona</a>
+    <a class="sec" href="#guia">Guía de uso</a>
+    <a class="sec" href="#prompts">Prompts</a>
+    <a class="sec" href="#outro">Otro tema</a>
+    <span class="lang"><a href="../">PT</a><a href="../en/">EN</a><a class="on" href="./">ES</a></span>
+    <button class="tgl" id="themeToggle" aria-label="Cambiar tema" title="Cambiar tema">🌙</button>
+    <a class="btn" href="https://github.com/inematds/congelou" target="_blank" rel="noopener">GitHub</a>
+  </div>
+</div></nav>
+
+<header class="hero" id="top">
+  <div class="glow"></div>
+  <div class="wrap">
+    <div>
+      <span class="chip">Kling AI · time freeze · audio nativo</span>
+      <h1>El pollo salió vivo del horno y el tiempo se <span class="amb">congeló</span></h1>
+      <p class="lead">Un corto de ~38 segundos hecho solo con la suscripción Kling AI vía el CLI oficial: tu rostro real en el primer cuadro, 4 clips encadenados, el efecto de congelamiento y el montaje con sonido.</p>
+      <div class="cta">
+        <a class="btn" href="#video">Ver el video</a>
+        <a class="btn ghost" href="#guia">Empezar la guía</a>
+      </div>
+    </div>
+    <figure><img src="../assets/banner.jpg" alt="Banner Congelou: hombre asustado y pollo asado congelado en el aire"></figure>
+  </div>
+</header>
+
+<section id="video"><div class="wrap">
+  <span class="chip">El resultado</span>
+  <h2>Mira (con sonido)</h2>
+  <p class="sub">Pollo en el horno → café → abre el horno → el pollo sale vivo → todo se congela y la cámara pasea por la escena → el tiempo vuelve y llega el desastre.</p>
+  <div class="player"><video controls preload="metadata" poster="../assets/poster.jpg" src="../assets/congelou.mp4"></video></div>
+</div></section>
+
+<section id="oque"><div class="wrap">
+  <span class="chip">Qué es</span>
+  <h2>Un pipeline corto y repetible de video con IA</h2>
+  <p class="sub">No es una app, es una receta probada: 3 scripts de shell + prompts en texto. Cada pieza se puede cambiar para contar otra historia.</p>
+  <div class="grid g3">
+    <div class="card"><h3>🙂 Tú eres el protagonista</h3><p>El primer cuadro se genera a partir de una foto real de tu rostro (Nano Banana Pro, dentro de la propia Kling). El resto de la película hereda ese rostro.</p></div>
+    <div class="card"><h3>🔗 Continuidad por encadenamiento</h3><p>Cada clip empieza en el último cuadro del anterior. Mismo personaje, misma cocina, misma luz, sin "saltos" entre escenas.</p></div>
+    <div class="card"><h3>🔊 Sonido incluido</h3><p>Kling 3.0 con <code>enable_audio</code>: puertas, pasos, café, el cacareo y el silencio del congelamiento salen junto con la imagen. El ffmpeg solo une y normaliza.</p></div>
+  </div>
+</div></section>
+
+<section id="fluxo"><div class="wrap">
+  <span class="chip">Cómo funciona</span>
+  <h2>Keyframe → clips encadenados → montaje</h2>
+  <p class="sub">Todo con tu cuenta Kling AI (CLI <code>kling</code>). Nada de Magnific, RunComfy u otro revendedor: es tu suscripción, tus créditos.</p>
+  <div class="flow">
+    <span>📸 foto del rostro</span><span class="arr">→</span>
+    <span>🖼️ keyframe k1</span><span class="arr">→</span>
+    <span>🎬 clip A</span><span class="arr">→</span>
+    <span>último cuadro</span><span class="arr">→</span>
+    <span>🎬 clip B</span><span class="arr">→</span>
+    <span>🎬 clip C (freeze)</span><span class="arr">→</span>
+    <span>🎬 clip D</span><span class="arr">→</span>
+    <span>✂️ ffmpeg</span><span class="arr">→</span>
+    <span>🎞️ final.mp4</span>
+  </div>
+  <div class="tbl" style="margin-top:28px"><table>
+    <tr><th>Clip</th><th>Qué pasa</th><th>Duración</th><th>Créditos Kling</th></tr>
+    <tr><td>k1</td><td>Still: tú colocando el pollo en el horno</td><td>imagen 2k</td><td>20</td></tr>
+    <tr><td>A</td><td>Empuja la bandeja, cierra el horno, gira la perilla</td><td>5s</td><td>60</td></tr>
+    <tr><td>B</td><td>Sirve el café, toma un sorbo, vuelve y toca la puerta</td><td>8s</td><td>96</td></tr>
+    <tr><td>C</td><td>Pollo vivo salta, <b>el tiempo se congela</b>, la cámara orbita, el tiempo vuelve</td><td>15s</td><td>180</td></tr>
+    <tr><td>D</td><td>El desastre a velocidad normal: harina, ollas, resbalón, fuga por la ventana</td><td>10s</td><td>120</td></tr>
+  </table></div>
+  <p class="mut" style="margin-top:12px;font-size:.9rem">Medido en la cuenta (plan Pro): Kling 3.0 a 1080p con audio sale por 12 créditos/segundo. La película completa costó cerca de 476 créditos.</p>
+</div></section>
+
+<section id="pre"><div class="wrap">
+  <span class="chip">Prerrequisitos</span>
+  <h2>Qué necesita estar en la máquina</h2>
+  <p class="sub">Tres cosas: el CLI oficial de Kling con sesión iniciada en tu cuenta, ffmpeg y Python 3.</p>
+  <div class="grid g3">
+    <div class="card"><h3>Kling CLI</h3><p>CLI oficial, cliente del MCP de Kling. Inicio de sesión vía navegador (OAuth).</p><pre><span class="k">npm</span> i -g @klingai/cli-global
+<span class="k">kling</span> login
+<span class="k">kling</span> account   <span class="c"># plan + créditos</span></pre></div>
+    <div class="card"><h3>ffmpeg / ffprobe</h3><p>Para extraer el último cuadro, generar contact sheets y montar el video final.</p><pre><span class="k">sudo apt</span> install ffmpeg</pre></div>
+    <div class="card"><h3>Python 3 + curl</h3><p>Usados por los scripts para leer el JSON de Kling y descargar los archivos.</p><pre><span class="k">python3</span> --version
+<span class="k">curl</span> --version</pre></div>
+  </div>
+</div></section>
+
+<section id="guia"><div class="wrap">
+  <span class="chip">Guía de uso · paso a paso</span>
+  <h2>Cómo se hizo este video (y cómo lo rehaces)</h2>
+  <p class="sub">Los comandos de abajo son exactamente los que generaron el video. Ejecútalos dentro de la carpeta del repo.</p>
+
+  <div class="step"><div class="b">1</div><div>
+    <h3>Revisa cuenta y modelos</h3>
+    <p>El <code>who_am_i</code> lista los modelos y parámetros que tu suscripción habilita. Presta atención a los valores por defecto: Kling 3.0 viene con <b>4k</b>, <b>audio apagado</b> y <b>multi-shot activado</b>, y los scripts sobrescriben los tres.</p>
+<pre><span class="k">kling</span> who_am_i -q &gt; who_am_i.json
+<span class="k">kling</span> account</pre>
+  </div></div>
+
+  <div class="step"><div class="b">2</div><div>
+    <h3>Keyframe inicial con tu rostro</h3>
+    <p>Una foto tuya + el prompt de la escena. Sale un still 2k 16:9 que se convierte en el primer cuadro de la película.</p>
+<pre><span class="k">./keyframe.sh</span> <span class="s">ref/nei.jpg</span> <span class="s">prompts/k1.txt</span>   <span class="c"># → keyframes/k1.png</span></pre>
+  </div></div>
+
+  <div class="step"><div class="b">3</div><div>
+    <h3>Genera los clips en cadena</h3>
+    <p>Cada <code>clip.sh</code> genera el clip, lo descarga, mide el audio, hace un contact sheet y guarda el último cuadro, que es el <b>inicio del siguiente</b>.</p>
+<pre><span class="k">./clip.sh</span> A keyframes/k1.png      5    <span class="c"># pollo en el horno</span>
+<span class="k">./clip.sh</span> B keyframes/A_last.png  8    <span class="c"># café y vuelta al horno</span>
+<span class="k">./clip.sh</span> C keyframes/B_last.png  15   <span class="c"># pollo vivo + TIME FREEZE</span>
+<span class="k">./clip.sh</span> D keyframes/C_last.png  10   <span class="c"># el desastre</span></pre>
+  </div></div>
+
+  <div class="step"><div class="b">4</div><div>
+    <h3>Mira cada clip antes de seguir</h3>
+    <p>Abre <code>clips/X_sheet.png</code> (8 cuadros a lo largo del clip). Si algo salió mal, rehaz solo ese clip: los siguientes parten de su último cuadro.</p>
+<pre><span class="k">xdg-open</span> clips/C_sheet.png</pre>
+  </div></div>
+
+  <div class="step"><div class="b">5</div><div>
+    <h3>Monta la película</h3>
+    <p>Estandariza en 1920×1080/24fps, corta el cuadro repetido de cada empalme, une con el audio nativo y normaliza en -14 LUFS.</p>
+<pre><span class="k">./montar.sh</span> A B C D   <span class="c"># → congelou_final.mp4</span></pre>
+  </div></div>
+</div></section>
+
+<section id="prompts"><div class="wrap">
+  <span class="chip">Prompts</span>
+  <h2>Los prompts usados</h2>
+  <p class="sub">Están en <code>prompts/</code>. El del congelamiento (C) fue adaptado de la plantilla <code>freeze_effect_template_en.md</code>, que es un esqueleto de escena, congelamiento, cámara congelada, reanudación y continuidad.</p>
+  <details><summary>k1 · keyframe (image_to_image, gemini-3-pro-image)</summary><pre>Photorealistic cinematic film still, 35mm, natural warm daylight. The man from image 1 (same face, bald head with short white hair on the sides, white stubble beard, black rectangular glasses, plain dark green t-shirt) stands in a cozy rustic home kitchen with exposed brick walls and dark wooden ceiling beams. He is bending slightly and sliding a metal roasting pan with a whole raw seasoned chicken (pale skin, herbs, garlic, lemon halves) into an open built-in stainless steel oven at waist height. [...]</pre></details>
+  <details><summary>C · el congelamiento (15s)</summary><pre>ACTION: The man pulls the oven door open, holding his white coffee mug in his other hand. Hot steam pours out. Suddenly the whole plucked, half-roasted golden chicken jumps up ALIVE from the roasting pan and leaps out of the oven straight toward his face [...] droplets of hot grease, sprigs of rosemary, a lemon slice and a garlic clove fly out of the pan. [...]
+
+TIME FREEZE: At the peak of the chicken's leap, time stops completely. The chicken hangs motionless in mid-air [...] Nothing moves except the camera.
+
+FROZEN CAMERA: The camera slowly glides around the frozen scene [...]
+
+RESUME: Time resumes instantly at normal speed with no effect. The chicken crashes onto the kitchen counter [...]
+
+Sound: [...] during the freeze total silence with only a low high-pitched ringing tone [...]</pre></details>
+  <p class="mut" style="font-size:.9rem">Prompts completos: <a href="https://github.com/inematds/congelou/tree/main/prompts" target="_blank" rel="noopener">github.com/inematds/congelou/prompts</a>.</p>
+  <div class="grid g3" style="margin-top:20px">
+    <div class="card"><h3>🧊 La regla de oro del freeze</h3><p>Todo objeto suspendido necesita una causa. El romero vuela porque el pollo saltó de la bandeja; el café vuela porque la taza se volcó del susto.</p></div>
+    <div class="card"><h3>🎥 La cámara se mueve, el mundo no</h3><p>Pide "nothing moves except the camera" y describe el recorrido de la cámara entre los objetos suspendidos.</p></div>
+    <div class="card"><h3>🔇 El sonido también se congela</h3><p>Describe el audio del freeze ("total silence with a low ringing tone"). El audio nativo acompaña el cambio.</p></div>
+  </div>
+</div></section>
+
+<section id="exemplos"><div class="wrap">
+  <span class="chip">Ejemplos</span>
+  <h2>Los cuatro clips, cuadro a cuadro</h2>
+  <p class="sub">Contact sheets reales generados por <code>fetch.sh</code>.</p>
+  <div class="ex">
+    <figure><img src="../assets/sheet_A.jpg" alt="Clip A: el pollo entra al horno" loading="lazy"><figcaption>A · el pollo entra al horno y enciendes la perilla</figcaption></figure>
+    <figure><img src="../assets/sheet_B.jpg" alt="Clip B: café y vuelta al horno" loading="lazy"><figcaption>B · café, sorbo, y la mano en la puerta del horno</figcaption></figure>
+    <figure><img src="../assets/sheet_C.jpg" alt="Clip C: pollo vivo congelado en el aire" loading="lazy"><figcaption>C · el pollo salta vivo y el tiempo se congela</figcaption></figure>
+    <figure><img src="../assets/sheet_D.jpg" alt="Clip D: el desastre en la cocina" loading="lazy"><figcaption>D · el tiempo vuelve y llega el desastre</figcaption></figure>
+  </div>
+</div></section>
+
+<section id="outro"><div class="wrap">
+  <span class="chip">Repítelo con otro tema</span>
+  <h2>Cambia la historia, mantén la receta</h2>
+  <p class="sub">El pipeline no sabe nada de pollos. Para hacer otro video, reescribes los prompts y ejecutas los mismos tres scripts.</p>
+
+  <div class="step"><div class="b">1</div><div>
+    <h3>Escribe la historia en 3 a 5 golpes con causa y efecto</h3>
+    <p>Presentación → preparación → lo imposible (freeze) → consecuencia. Cada golpe se convierte en un clip de 5 a 15s. Ejemplo: <i>"lavo el auto → voy a buscar la manguera → el auto se va solo → se congela en el aire sobre el charco → aterriza y me salpica de barro"</i>.</p>
+  </div></div>
+
+  <div class="step"><div class="b">2</div><div>
+    <h3>Crea una carpeta nueva y copia los scripts</h3>
+<pre><span class="k">mkdir</span> ~/projetos/meu-freeze &amp;&amp; <span class="k">cd</span> ~/projetos/meu-freeze
+<span class="k">cp</span> ~/projetos/congelou/{keyframe,clip,fetch,montar}.sh .
+<span class="k">mkdir</span> prompts ref &amp;&amp; <span class="k">cp</span> <span class="s">minha-foto.jpg</span> ref/</pre>
+  </div></div>
+
+  <div class="step"><div class="b">3</div><div>
+    <h3>Escribe los prompts</h3>
+    <p><code>prompts/k1.txt</code> es el primer cuadro, y <code>A.txt</code>, <code>B.txt</code>… son los clips. En el clip del congelamiento, copia el esqueleto de <code>freeze_effect_template_en.md</code> y cambia solo el contenido. Pon siempre una línea <code>Sound:</code> al final.</p>
+  </div></div>
+
+  <div class="step"><div class="b">4</div><div>
+    <h3>Ejecuta la cadena y monta</h3>
+<pre><span class="k">./keyframe.sh</span> ref/minha-foto.jpg prompts/k1.txt
+<span class="k">./clip.sh</span> A keyframes/k1.png 5
+<span class="k">./clip.sh</span> B keyframes/A_last.png 8
+<span class="k">./clip.sh</span> C keyframes/B_last.png 15
+<span class="k">OUT</span>=meu_filme.mp4 <span class="k">./montar.sh</span> A B C</pre>
+  </div></div>
+
+  <div class="step"><div class="b">5</div><div>
+    <h3>Pidiéndoselo a Claude Code</h3>
+    <p>Se puede pedir en lenguaje natural. Di "usa mi suscripción klingai" para que use el CLI <code>kling</code>, y pasa la historia y el archivo de plantilla del freeze.</p>
+<pre><span class="c"># ejemplo de solicitud</span>
+<span class="s">"usa el klingai directo y crea esta historia: ... congelo como este prompt</span>
+<span class="s"> ~/projetos/congelou/prompts/freeze_effect_template_en.md; júntalo con sonido"</span></pre>
+  </div></div>
+</div></section>
+
+<section id="roadmap"><div class="wrap">
+  <span class="chip">Lecciones</span>
+  <h2>Lo que aprendimos haciéndolo</h2>
+  <p class="sub">Detalles que ahorran créditos la próxima vez.</p>
+  <div class="phase"><div class="tag">Defaults</div><div class="d"><strong>Sobrescribe resolución, audio y multi-shot</strong><span>Kling 3.0 viene con 4k (más caro), audio apagado y multi-shot activado (corta la escena). Para el freeze usa 1080p, <code>enable_audio true</code> y <code>prefer_multi_shots false</code>.</span></div></div>
+  <div class="phase"><div class="tag">15s</div><div class="d"><strong>15 segundos en plano único funciona</strong><span>El clip C corrió 15s sin multi-shot y sostuvo el congelamiento con la cámara orbitando.</span></div></div>
+  <div class="phase"><div class="tag">URLs</div><div class="d"><strong>Descarga de inmediato</strong><span>Las URLs de resultado de Kling expiran en 24h. El <code>fetch.sh</code> descarga en cuanto el clip termina.</span></div></div>
+  <div class="phase"><div class="tag">Portada</div><div class="d"><strong>Usa un cuadro real</strong><span>La mejor portada es un cuadro del propio freeze. Un generador de imágenes genérico tiende a ser demasiado literal.</span></div></div>
+</div></section>
+
+<footer>
+  <div class="wrap">
+    <div class="pill">Kling AI 3.0</div><div class="pill">kling CLI</div><div class="pill">ffmpeg</div><div class="pill">bash</div>
+    <p style="margin-top:18px">Congelou · hecho con la suscripción Kling AI del autor ·
+      <a href="https://github.com/inematds/congelou">inematds/congelou</a> ·
+      <a href="https://inema.club">INEMA.CLUB</a></p>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var KEY='congelou-theme';
+    var b=document.body, t=document.getElementById('themeToggle');
+    if(localStorage.getItem(KEY)==='light'){ b.classList.add('light'); t.textContent='☀️'; }
+    t.addEventListener('click',function(){
+      var light=b.classList.toggle('light');
+      t.textContent=light?'☀️':'🌙';
+      localStorage.setItem(KEY, light?'light':'dark');
+    });
+  })();
+</script>
+</body>
+</html>
