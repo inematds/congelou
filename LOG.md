@@ -20,3 +20,4 @@ Ref de rosto: `ref/nei.jpg` (cópia de ~/projetos/explicavideos/guia/assets/nei.
 - 16:18 M2 OK (144 créd) mas órbita termina de cabeça p/ baixo e prato desliza no freeze → corta em 8.0s, M3 parte de M2_cut.png; v2 montada 41.2s
 - 16:22 M3 OK (120 créd, 10s) → montagem v3
 - 16:24 v3 microondas.mp4 32.2s -14.5 LUFS publicada no guia. Créditos restantes 6853.8
+- 16:28 v2 ATUALIZADA a pedido: câmera lenta interpolada → 4 paradas (anda 0.3s / trava 0.8→0.4s, som some na trava). 37.6s. Sem custo Kling. Backup slow-mo em build/.
