@@ -18,3 +18,5 @@ Ref de rosto: `ref/nei.jpg` (cópia de ~/projetos/explicavideos/guia/assets/nei.
 - 16:14 M1 OK (96 créd, 8s) → M2 submetido (12s, gato + freeze)
 - 16:15 D2 OK (120 créd, 10s; cozinha deriva p/ genérica) → montagem v2
 - 16:18 M2 OK (144 créd) mas órbita termina de cabeça p/ baixo e prato desliza no freeze → corta em 8.0s, M3 parte de M2_cut.png; v2 montada 41.2s
+- 16:22 M3 OK (120 créd, 10s) → montagem v3
+- 16:24 v3 microondas.mp4 32.2s -14.5 LUFS publicada no guia. Créditos restantes 6853.8
