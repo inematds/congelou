@@ -10,3 +10,4 @@ Ref de rosto: `ref/nei.jpg` (cópia de ~/projetos/explicavideos/guia/assets/nei.
 - 15:04 clip C OK (180 créd, 15.04s, freeze funcionou: frango suspenso + órbita) → C_last.png; clip D submetido (10s, estrago)
 - 15:10 clip D OK (120 créd, 10.04s; cozinha deriva um pouco pro genérico) → montagem
 - 15:12 FINAL congelou_final.mp4 38.0s 1920x1080, -14.8 LUFS. Total ~476 créditos Kling (7973.8 → 7497.8). Capa refeita com quadro real do freeze (Codex gerou folha congelada, off-topic).
+- 15:15 publicado: repo inematds/congelou (e6d507a), guia PT/EN/ES 200; portal 6a4feae, inemabuscas f6d2bb4, inemapro-mono 10af3aa
