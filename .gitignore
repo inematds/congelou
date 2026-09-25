@@ -1,12 +1,12 @@
 # brutos pesados / temporários (o vídeo publicado fica em guia/assets/congelou.mp4)
 clips/
 keyframes/
-congelou_final.mp4
+/congelou_final.mp4
 final_sheet.png
 who_am_i.json
 capa/*.log
 capa/frozen_raw.png
 guia/assets/*.log
 build/
-congelou_v*.mp4
-microondas*.mp4
+/congelou_v*.mp4
+/microondas*.mp4
