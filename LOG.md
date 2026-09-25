@@ -11,3 +11,10 @@ Ref de rosto: `ref/nei.jpg` (cópia de ~/projetos/explicavideos/guia/assets/nei.
 - 15:10 clip D OK (120 créd, 10.04s; cozinha deriva um pouco pro genérico) → montagem
 - 15:12 FINAL congelou_final.mp4 38.0s 1920x1080, -14.8 LUFS. Total ~476 créditos Kling (7973.8 → 7497.8). Capa refeita com quadro real do freeze (Codex gerou folha congelada, off-topic).
 - 15:15 publicado: repo inematds/congelou (e6d507a), guia PT/EN/ES 200; portal 6a4feae, inemabuscas f6d2bb4, inemapro-mono 10af3aa
+- 16:09 V2 pedida: galinha sai na hora, freeze total (inclusive ele, só câmera), volta em câmera muito lenta → natural. Reusa A,B. C2 submetido (12s)
+- 16:10 V3 pedida: prato no microondas, sai gato vivo assustado, eu viro/derrubo tudo. Estilo v2 (freeze total + rampa slow-mo).
+- 16:11 k3 OK (20 créd); M1 submetido (8s)
+- 16:13 C2 OK (144 créd, 12s; freeze total + órbita dramática; fundo clareia no fim) → D2 submetido (10s)
+- 16:14 M1 OK (96 créd, 8s) → M2 submetido (12s, gato + freeze)
+- 16:15 D2 OK (120 créd, 10s; cozinha deriva p/ genérica) → montagem v2
+- 16:18 M2 OK (144 créd) mas órbita termina de cabeça p/ baixo e prato desliza no freeze → corta em 8.0s, M3 parte de M2_cut.png; v2 montada 41.2s

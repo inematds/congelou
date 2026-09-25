@@ -7,3 +7,6 @@ who_am_i.json
 capa/*.log
 capa/frozen_raw.png
 guia/assets/*.log
+build/
+congelou_v*.mp4
+microondas*.mp4
